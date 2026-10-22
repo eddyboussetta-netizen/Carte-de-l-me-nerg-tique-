@@ -5,15 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Les Dimensions Gaia - Profil Énergétique & Symbolique</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <!-- html2pdf.js library pour téléchargement PDF direct -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- html2pdf.js CDN (Génération PDF directe) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <script>
@@ -33,7 +37,7 @@
                             700: '#15803d',
                             800: '#166534',
                             900: '#14532d',
-                            dark: '#050c08',
+                            dark: '#030805',
                             card: '#0a1710',
                             gold: '#d4af37',
                             goldlight: '#f3e5ab',
@@ -57,9 +61,9 @@
             background-color: #030805;
             color: #e2e8f0;
             background-image: 
-                radial-gradient(circle at 50% 0%, rgba(45, 27, 78, 0.4) 0%, transparent 70%),
-                radial-gradient(circle at 10% 30%, rgba(21, 128, 61, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 90% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+                radial-gradient(circle at 50% 0%, rgba(45, 27, 78, 0.45) 0%, transparent 70%),
+                radial-gradient(circle at 10% 30%, rgba(21, 128, 61, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 90% 70%, rgba(212, 175, 55, 0.15) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
@@ -70,40 +74,39 @@
         }
 
         .glass-panel {
-            background: rgba(10, 23, 16, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            background: rgba(10, 23, 16, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.6);
         }
 
         .glass-card {
-            background: rgba(15, 32, 23, 0.6);
+            background: rgba(15, 32, 23, 0.65);
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(52, 211, 153, 0.15);
+            border: 1px solid rgba(52, 211, 153, 0.2);
         }
 
-        /* Formatage spécifique pour le document PDF exportable */
-        .pdf-export-container {
+        /* Styles d'exportation PDF ultra-propres */
+        #pdfExportRenderArea {
             background: #ffffff !important;
             color: #1a202c !important;
             font-family: 'Cormorant Garamond', serif !important;
-            padding: 0 !important;
-            margin: 0 !important;
+            width: 210mm;
+            margin: 0 auto;
         }
 
-        .pdf-page {
+        .pdf-page-sheet {
             width: 210mm;
-            min-height: 295mm;
-            padding: 15mm;
-            margin: 0 auto;
+            min-height: 296mm;
+            padding: 15mm 15mm 20mm 15mm;
+            box-sizing: border-box;
             background: #ffffff !important;
             color: #1a202c !important;
-            box-sizing: border-box;
-            page-break-after: always;
             position: relative;
+            page-break-after: always;
         }
 
-        .pdf-page:last-child {
+        .pdf-page-sheet:last-child {
             page-break-after: avoid;
         }
 
@@ -115,7 +118,7 @@
             .no-print {
                 display: none !important;
             }
-            .print-only {
+            #resultsSection {
                 display: block !important;
             }
         }
@@ -123,23 +126,23 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans antialiased text-slate-200 selection:bg-amber-500 selection:text-black">
 
-    <!-- Header / Navbar -->
-    <header class="no-print border-b border-amber-500/20 bg-black/60 backdrop-blur-md sticky top-0 z-50">
+    <!-- En-tête / Navigation -->
+    <header class="no-print border-b border-amber-500/20 bg-black/70 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-12 h-12 rounded-full border border-amber-400/50 bg-gradient-to-br from-emerald-900 to-purple-950 flex items-center justify-center shadow-lg shadow-emerald-950/50">
-                    <i class="fa-solid font-cinzel text-amber-300 text-xl">GA</i>
+                    <span class="font-cinzel font-bold text-amber-300 text-xl">GA</span>
                 </div>
                 <div>
-                    <h1 class="font-cinzeldec font-bold text-lg sm:text-xl text-amber-200 tracking-wider">LES DIMENSIONS GAIA</h1>
-                    <p class="text-xs font-garamond italic text-emerald-400 tracking-widest">Créé par Eddy Bousseta</p>
+                    <h1 class="font-cinzeldec font-bold text-base sm:text-xl text-amber-200 tracking-wider">LES DIMENSIONS GAIA</h1>
+                    <p class="text-xs font-garamond italic text-emerald-400 tracking-widest">Par Eddy Bousseta</p>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <span class="hidden md:inline-flex items-center text-xs text-amber-300/80 bg-amber-950/40 border border-amber-500/30 px-3 py-1 rounded-full">
-                    <i class="fa-solid fa-sparkles mr-2 text-amber-400"></i> Bilan Énergétique & Pratiques Sacrées
+                <span class="hidden md:inline-flex items-center text-xs text-amber-300/90 bg-amber-950/40 border border-amber-500/30 px-3 py-1.5 rounded-full">
+                    <i class="fa-solid fa-sparkles mr-2 text-amber-400"></i> Bilan Spirituel Personnalisé (30 €)
                 </span>
-                <button id="resetAppBtn" onclick="resetForm()" class="hidden text-xs text-slate-400 hover:text-amber-300 transition-colors">
+                <button id="resetAppBtn" onclick="resetForm()" class="hidden text-xs text-slate-400 hover:text-amber-300 transition-colors py-2 px-3 rounded-lg bg-slate-900 border border-slate-800">
                     <i class="fa-solid fa-rotate-left mr-1"></i> Nouveau profil
                 </button>
             </div>
@@ -148,18 +151,18 @@
 
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         
-        <!-- SECTION FORMULAIRE -->
+        <!-- FORMULAIRE DE SAISIE -->
         <section id="formSection" class="no-print max-w-3xl mx-auto transition-all duration-500">
             <div class="glass-panel rounded-3xl p-6 sm:p-10 relative overflow-hidden">
                 <div class="text-center mb-8 sm:mb-10">
                     <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest text-amber-300 bg-amber-500/10 border border-amber-500/30 mb-3">
-                        Révélation de l'Âme • Fiche Personnalisée 30 €
+                        Générateur de Fiche Énergétique & Reconnexion
                     </span>
                     <h2 class="font-cinzel text-2xl sm:text-4xl font-bold gold-gradient-text mb-3">
-                        Générez Votre Profil Gaia Complet
+                        Révélez Votre Empreinte Vibratoire
                     </h2>
-                    <p class="font-garamond text-lg sm:text-xl text-slate-300 italic max-w-xl mx-auto">
-                        Saisissez les informations de naissance. Notre algorithme calculera votre thème, vos archanges protecteurs, vos minéraux d'alignement et vos méthodes pratiques d'épanouissement.
+                    <p class="font-garamond text-base sm:text-xl text-slate-300 italic max-w-xl mx-auto">
+                        Entrez vos données de naissance exactes pour calculer votre thème astrologique, votre Archange, vos minéraux sacrés et vos clés de pratique personnalisées.
                     </p>
                 </div>
 
@@ -188,39 +191,38 @@
                                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                                     <i class="fa-solid fa-signature"></i>
                                 </div>
-                                <input type="text" id="firstname" required placeholder="ex: Gabriel Marie" autocomplete="off"
+                                <input type="text" id="firstname" required placeholder="ex: Laurent Gabriel" autocomplete="off"
                                     class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-emerald-900/60 focus:border-amber-400 rounded-xl text-slate-100 placeholder-slate-600 outline-none transition-all">
                             </div>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                        <!-- Date de Naissance -->
-                        <div class="sm:col-span-1">
-                            <label for="birthdate" class="block text-xs font-semibold text-amber-200/90 uppercase tracking-wider mb-2">
+                        <!-- Date de Naissance (Champ texte/numérique hybride ultra-réactif) -->
+                        <div>
+                            <label for="birthdateText" class="block text-xs font-semibold text-amber-200/90 uppercase tracking-wider mb-2">
                                 Date de Naissance <span class="text-amber-400">*</span>
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-                                    <i class="fa-solid fa-calendar-day"></i>
+                                    <i class="fa-solid fa-calendar-days"></i>
                                 </div>
-                                <input type="text" id="birthdate" required inputmode="numeric" placeholder="JJ/MM/AAAA" maxlength="10" autocomplete="off"
+                                <input type="text" id="birthdateText" required placeholder="JJ/MM/AAAA" inputmode="numeric" maxlength="10"
                                     oninput="formatDateInput(this)"
                                     class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-emerald-900/60 focus:border-amber-400 rounded-xl text-slate-100 placeholder-slate-600 outline-none transition-all">
                             </div>
-                            <span id="dateError" class="hidden text-xs text-rose-400 mt-1">Format requis : JJ/MM/AAAA</span>
                         </div>
 
                         <!-- Heure de Naissance -->
                         <div>
-                            <label for="birthtime" class="block text-xs font-semibold text-amber-200/90 uppercase tracking-wider mb-2">
+                            <label for="birthtimeText" class="block text-xs font-semibold text-amber-200/90 uppercase tracking-wider mb-2">
                                 Heure <span class="text-slate-500 font-normal">(Optionnel)</span>
                             </label>
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                                     <i class="fa-solid fa-clock"></i>
                                 </div>
-                                <input type="text" id="birthtime" inputmode="numeric" placeholder="HH:MM" maxlength="5" autocomplete="off"
+                                <input type="text" id="birthtimeText" placeholder="HH:MM" inputmode="numeric" maxlength="5"
                                     oninput="formatTimeInput(this)"
                                     class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-emerald-900/60 focus:border-amber-400 rounded-xl text-slate-100 placeholder-slate-600 outline-none transition-all">
                             </div>
@@ -232,14 +234,11 @@
                                 Genre <span class="text-amber-400">*</span>
                             </label>
                             <div class="relative">
-                                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-                                    <i class="fa-solid fa-venus-mars"></i>
-                                </div>
                                 <select id="gender" required
-                                    class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-emerald-900/60 focus:border-amber-400 rounded-xl text-slate-100 outline-none transition-all">
+                                    class="w-full px-4 py-3 bg-slate-950/80 border border-emerald-900/60 focus:border-amber-400 rounded-xl text-slate-100 outline-none transition-all">
                                     <option value="homme">Homme</option>
                                     <option value="femme">Femme</option>
-                                    <option value="autre">Non-binaire / Autre</option>
+                                    <option value="autre">Autre / Non-spécifié</option>
                                 </select>
                             </div>
                         </div>
@@ -254,7 +253,7 @@
                             <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
                                 <i class="fa-solid fa-location-dot"></i>
                             </div>
-                            <input type="text" id="birthplace" required placeholder="ex: Paris, France ou Bruxelles, Belgique" autocomplete="off"
+                            <input type="text" id="birthplace" required placeholder="ex: Paris (France) ou Bruxelles (Belgique)" autocomplete="off"
                                 class="w-full pl-10 pr-4 py-3 bg-slate-950/80 border border-emerald-900/60 focus:border-amber-400 rounded-xl text-slate-100 placeholder-slate-600 outline-none transition-all">
                         </div>
                     </div>
@@ -262,14 +261,14 @@
                     <!-- Bouton Submit -->
                     <div class="pt-4">
                         <button type="submit" 
-                            class="w-full py-4 px-8 rounded-xl font-cinzel font-bold text-lg text-slate-950 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 shadow-xl shadow-amber-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center space-x-3 group">
-                            <span>Générer l'Étude & Activer le PDF</span>
+                            class="w-full py-4 px-8 rounded-xl font-cinzel font-bold text-base sm:text-lg text-slate-950 bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 hover:from-amber-200 hover:to-amber-400 shadow-xl shadow-amber-500/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 flex items-center justify-center space-x-3 group">
+                            <span>Calculer le Profil & Activer le Bilan</span>
                             <i class="fa-solid fa-wand-magic-sparkles text-slate-950 group-hover:rotate-12 transition-transform"></i>
                         </button>
                     </div>
 
                     <p class="text-center text-xs text-slate-500 font-garamond italic">
-                        Les Dimensions Gaia • Eddy Bousseta. Fiche personnalisée de reconnexion intérieure.
+                        Les Dimensions Gaia • Eddy Bousseta. Fiche personnalisée de reconnexion sacrée.
                     </p>
                 </form>
             </div>
@@ -286,206 +285,207 @@
             </div>
             <div>
                 <h3 class="font-cinzel text-xl text-amber-300 font-semibold mb-1">Alignement des Fréquences de Gaia...</h3>
-                <p class="font-garamond text-slate-400 italic text-lg">Calcul de votre archange, minéral maître, clés de reconnexion et rapport PDF...</p>
+                <p class="font-garamond text-slate-400 italic text-lg">Calcul de votre zodiaque, archange, cristal maître et synthèse de 2 pages...</p>
             </div>
         </div>
 
-        <!-- SECTION RÉSULTATS (ÉCRAN) -->
-        <div id="resultsSection" class="hidden space-y-12">
+        <!-- RÉSULTATS À L'ÉCRAN -->
+        <div id="resultsSection" class="hidden space-y-10">
             
-            <!-- Actions Bar -->
-            <div class="no-print flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl glass-panel border-amber-500/30">
+            <!-- Barre d'Actions -->
+            <div class="no-print flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl glass-panel border-amber-500/40">
                 <div>
-                    <h3 class="font-cinzel font-bold text-amber-300" id="summaryHeaderName">Profil de ...</h3>
-                    <p class="text-xs text-slate-400 font-garamond">Étude générée • Téléchargement direct activé</p>
+                    <h3 class="font-cinzel font-bold text-amber-300 text-lg" id="summaryHeaderName">Profil de ...</h3>
+                    <p class="text-xs text-slate-400 font-garamond">Bilan spirituel calculé avec succès • Prêt pour export PDF</p>
                 </div>
                 <div class="flex flex-wrap items-center gap-3">
                     <!-- Bouton Téléchargement PDF Direct -->
-                    <button onclick="downloadPDFDirectly()" id="downloadPdfBtn" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-bold hover:from-amber-300 hover:to-amber-400 text-sm transition-all shadow-lg flex items-center space-x-2">
-                        <i class="fa-solid fa-file-arrow-down"></i>
-                        <span>Télécharger le PDF Automatiquement</span>
+                    <button onclick="downloadPDFDirectly()" id="downloadPdfBtn" class="px-5 py-3 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 font-bold hover:from-amber-300 hover:to-amber-500 text-sm transition-all shadow-lg flex items-center space-x-2">
+                        <i class="fa-solid fa-file-pdf text-base"></i>
+                        <span>Télécharger le Rapport PDF (30 €)</span>
                     </button>
-                    <!-- Bouton Impression Classique -->
-                    <button onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-amber-500/10 border border-amber-400/30 text-amber-200 hover:bg-amber-500/20 font-medium text-sm transition-all flex items-center space-x-1">
+                    <!-- Bouton Impression -->
+                    <button onclick="window.print()" class="px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-400/30 text-amber-200 hover:bg-amber-500/20 font-medium text-sm transition-all flex items-center space-x-2">
                         <i class="fa-solid fa-print"></i>
                         <span>Imprimer</span>
                     </button>
-                    <button onclick="resetForm()" class="px-4 py-2.5 rounded-xl bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 font-medium text-sm transition-all">
-                        <i class="fa-solid fa-user-plus mr-1"></i> Autre Saisie
+                    <button onclick="resetForm()" class="px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-300 hover:bg-slate-800 font-medium text-sm transition-all">
+                        <i class="fa-solid fa-user-plus mr-1"></i> Nouveau
                     </button>
                 </div>
             </div>
 
             <!-- EN-TÊTE DU PROFIL -->
             <div class="glass-panel rounded-3xl p-8 sm:p-12 text-center relative overflow-hidden border-amber-500/30">
-                <div class="inline-block px-4 py-1 rounded-full text-xs font-semibold text-emerald-300 bg-emerald-950/60 border border-emerald-500/30 mb-4">
-                    LES DIMENSIONS GAIA • FICHES D'ALIGNEMENT SPIRITUEL
+                <div class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 mb-4">
+                    LES DIMENSIONS GAIA • EMPREINTE SPIRITUELLE CERTIFIÉE
                 </div>
-                <h1 class="font-cinzeldec text-3xl sm:text-5xl font-bold gold-gradient-text mb-2" id="resFullName">
+                <h1 class="font-cinzeldec text-3xl sm:text-5xl font-bold gold-gradient-text mb-3" id="resFullName">
                     -
                 </h1>
-                <p class="font-garamond text-xl text-emerald-300 italic mb-6" id="resMetaBirth">
+                <p class="font-garamond text-xl sm:text-2xl text-emerald-300 italic mb-6" id="resMetaBirth">
                     -
                 </p>
 
-                <!-- Badges rapides -->
+                <!-- Badges d'Aperçu Rapide -->
                 <div class="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs font-semibold">
-                    <span class="px-4 py-2 rounded-xl bg-slate-900/80 border border-amber-500/30 text-amber-200 flex items-center gap-2">
-                        <i class="fa-solid fa-sun text-amber-400"></i> Signe : <strong id="badgeZodiac" class="text-white">-</strong>
+                    <span class="px-4 py-2 rounded-xl bg-slate-950/80 border border-amber-500/30 text-amber-200 flex items-center gap-2">
+                        <i class="fa-solid fa-sun text-amber-400"></i> Zodiaque : <strong id="badgeZodiac" class="text-white">-</strong>
                     </span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-900/80 border border-purple-500/30 text-purple-200 flex items-center gap-2">
-                        <i class="fa-solid fa-angel text-purple-400"></i> Archange : <strong id="badgeArchangel" class="text-white">-</strong>
+                    <span class="px-4 py-2 rounded-xl bg-slate-950/80 border border-purple-500/30 text-purple-200 flex items-center gap-2">
+                        <i class="fa-solid fa-feather-pointed text-purple-400"></i> Archange : <strong id="badgeArchangel" class="text-white">-</strong>
                     </span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-900/80 border border-emerald-500/30 text-emerald-200 flex items-center gap-2">
-                        <i class="fa-solid fa-gem text-emerald-400"></i> Minéral Sacré : <strong id="badgeMineral" class="text-white">-</strong>
+                    <span class="px-4 py-2 rounded-xl bg-slate-950/80 border border-emerald-500/30 text-emerald-200 flex items-center gap-2">
+                        <i class="fa-solid fa-gem text-emerald-400"></i> Cristal : <strong id="badgeMineral" class="text-white">-</strong>
                     </span>
-                    <span class="px-4 py-2 rounded-xl bg-slate-900/80 border border-rose-500/30 text-rose-200 flex items-center gap-2">
+                    <span class="px-4 py-2 rounded-xl bg-slate-950/80 border border-rose-500/30 text-rose-200 flex items-center gap-2">
                         <i class="fa-solid fa-music text-rose-400"></i> Pratique Clé : <strong id="badgePractice" class="text-white">-</strong>
                     </span>
                 </div>
             </div>
 
-            <!-- GRILLE DES MODULES VIBRATOIRES -->
+            <!-- GRILLE DE MODULES MYSTIQUES -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                <!-- 1. Archange & Protection Angélique -->
+                <!-- 1. Archange Protecteur -->
                 <div class="glass-card rounded-2xl p-6 relative">
-                    <div class="flex items-center space-x-3 mb-4 border-b border-purple-500/20 pb-3">
-                        <div class="w-10 h-10 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                    <div class="flex items-center space-x-3 mb-4 border-b border-purple-500/30 pb-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-300">
                             <i class="fa-solid fa-feather-pointed"></i>
                         </div>
                         <div>
                             <h3 class="font-cinzel font-bold text-purple-200">1. Archange Protecteur</h3>
-                            <p class="text-xs text-slate-400">Guide céleste le plus proche</p>
+                            <p class="text-xs text-slate-400">Guide céleste de naissance</p>
                         </div>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <p><strong class="text-purple-300">Archange Majeur :</strong> <span id="resArchangel" class="text-slate-300">-</span></p>
-                        <p><strong class="text-purple-300">Rayon Céleste :</strong> <span id="resArchangelRay" class="text-slate-300">-</span></p>
-                        <p><strong class="text-purple-300">Mission d'Intercession :</strong> <span id="resArchangelMission" class="text-slate-300">-</span></p>
+                    <div class="space-y-2.5 text-sm">
+                        <p><strong class="text-purple-300">Archange :</strong> <span id="resArchangel" class="text-slate-200 font-semibold">-</span></p>
+                        <p><strong class="text-purple-300">Rayon Sacré :</strong> <span id="resArchangelRay" class="text-slate-300">-</span></p>
+                        <p><strong class="text-purple-300">Rôle Spirituel :</strong> <span id="resArchangelRole" class="text-slate-300">-</span></p>
                     </div>
                 </div>
 
-                <!-- 2. Pierre & Minéral Sacré -->
+                <!-- 2. Minéral Sacré & Cristal -->
                 <div class="glass-card rounded-2xl p-6 relative">
-                    <div class="flex items-center space-x-3 mb-4 border-b border-emerald-500/20 pb-3">
-                        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <div class="flex items-center space-x-3 mb-4 border-b border-emerald-500/30 pb-3">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300">
                             <i class="fa-solid fa-gem"></i>
                         </div>
                         <div>
-                            <h3 class="font-cinzel font-bold text-emerald-200">2. Minéral Sacré & Cristal</h3>
+                            <h3 class="font-cinzel font-bold text-emerald-200">2. Minéral Sacré</h3>
                             <p class="text-xs text-slate-400">Pierre alliée de lithothérapie</p>
                         </div>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <p><strong class="text-emerald-300">Pierre Maîtresse :</strong> <span id="resMineralStone" class="text-slate-300">-</span></p>
-                        <p><strong class="text-emerald-300">Propriété Vibratoire :</strong> <span id="resMineralProp" class="text-slate-300">-</span></p>
-                        <p><strong class="text-emerald-300">Purification / Recharge :</strong> <span id="resMineralCare" class="text-slate-300">-</span></p>
+                    <div class="space-y-2.5 text-sm">
+                        <p><strong class="text-emerald-300">Cristal Maître :</strong> <span id="resMineralStone" class="text-slate-200 font-semibold">-</span></p>
+                        <p><strong class="text-emerald-300">Vertu Thérapeutique :</strong> <span id="resMineralProp" class="text-slate-300">-</span></p>
+                        <p><strong class="text-emerald-300">Purification & Recharge :</strong> <span id="resMineralCare" class="text-slate-300">-</span></p>
                     </div>
                 </div>
 
-                <!-- 3. Astuces de Pratique Personnalisée -->
+                <!-- 3. Pratique Spirituelle d'Épanouissement -->
                 <div class="glass-card rounded-2xl p-6 relative">
-                    <div class="flex items-center space-x-3 mb-4 border-b border-amber-500/20 pb-3">
-                        <div class="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
-                            <i class="fa-solid fa-masks-theater"></i>
+                    <div class="flex items-center space-x-3 mb-4 border-b border-amber-500/30 pb-3">
+                        <div class="w-10 h-10 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300">
+                            <i class="fa-solid fa-dharmachakra"></i>
                         </div>
                         <div>
-                            <h3 class="font-cinzel font-bold text-amber-200">3. Voie Prioritaire de Reconnexion</h3>
-                            <p class="text-xs text-slate-400">Chant, Méditation, Musique, Forêt...</p>
+                            <h3 class="font-cinzel font-bold text-amber-200">3. Voie d'Épanouissement</h3>
+                            <p class="text-xs text-slate-400">Méditation, Chant, Forêt...</p>
                         </div>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <p><strong class="text-amber-300">Méthode Idéale :</strong> <span id="resPracticeTitle" class="text-slate-300 font-semibold">-</span></p>
-                        <p><strong class="text-amber-300">Astuce & Clé d'Envol :</strong> <span id="resPracticeTip" class="text-slate-300">-</span></p>
+                    <div class="space-y-2.5 text-sm">
+                        <p><strong class="text-amber-300">Méthode Idéale :</strong> <span id="resPracticeTitle" class="text-slate-200 font-semibold">-</span></p>
+                        <p><strong class="text-amber-300">Clé d'Activation :</strong> <span id="resPracticeTip" class="text-slate-300">-</span></p>
                     </div>
                 </div>
 
                 <!-- 4. Numérologie & Prénom -->
                 <div class="glass-card rounded-2xl p-6 relative">
-                    <div class="flex items-center space-x-3 mb-4 border-b border-blue-500/20 pb-3">
-                        <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+                    <div class="flex items-center space-x-3 mb-4 border-b border-blue-500/30 pb-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-500/20 border border-blue-500/40 flex items-center justify-center text-blue-300">
                             <i class="fa-solid fa-signature"></i>
                         </div>
                         <div>
                             <h3 class="font-cinzel font-bold text-blue-200">4. Prénom & Numérologie</h3>
-                            <p class="text-xs text-slate-400">Chemin de vie & Année</p>
+                            <p class="text-xs text-slate-400">Vibration des nombres de vie</p>
                         </div>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <p><strong class="text-blue-300">Étymologie :</strong> <span id="resEtymology" class="text-slate-300">-</span></p>
-                        <p><strong class="text-blue-300">Chemin de Vie :</strong> <span id="resLifePath" class="text-slate-300">-</span></p>
+                    <div class="space-y-2.5 text-sm">
+                        <p><strong class="text-blue-300">Chemin de Vie :</strong> <span id="resLifePath" class="text-slate-200 font-semibold">-</span></p>
                         <p><strong class="text-blue-300">Nombre d'Expression :</strong> <span id="resExpressionNum" class="text-slate-300">-</span></p>
                         <p><strong class="text-blue-300">Année Personnelle :</strong> <span id="resPersonalYear" class="text-slate-300">-</span></p>
+                        <p><strong class="text-blue-300">Vibration du Prénom :</strong> <span id="resEtymology" class="text-slate-300">-</span></p>
                     </div>
                 </div>
 
-                <!-- 5. Flore Celtique & Totem -->
+                <!-- 5. Flore Druidique & Animal Totem -->
                 <div class="glass-card rounded-2xl p-6 relative">
-                    <div class="flex items-center space-x-3 mb-4 border-b border-emerald-500/20 pb-3">
-                        <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <div class="flex items-center space-x-3 mb-4 border-b border-emerald-500/30 pb-3">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-300">
                             <i class="fa-solid fa-tree"></i>
                         </div>
                         <div>
-                            <h3 class="font-cinzel font-bold text-emerald-200">5. Nature & Animal Totem</h3>
-                            <p class="text-xs text-slate-400">Arbre druidique & chamanisme</p>
+                            <h3 class="font-cinzel font-bold text-emerald-200">5. Horoscopes Celtique & Totem</h3>
+                            <p class="text-xs text-slate-400">Arbre protecteur & Chamanisme</p>
                         </div>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <p><strong class="text-emerald-300">Arbre Protecteur :</strong> <span id="resTree" class="text-slate-300">-</span></p>
+                    <div class="space-y-2.5 text-sm">
+                        <p><strong class="text-emerald-300">Arbre Protecteur :</strong> <span id="resTree" class="text-slate-200 font-semibold">-</span></p>
                         <p><strong class="text-emerald-300">Fleur Totem :</strong> <span id="resFlower" class="text-slate-300">-</span></p>
                         <p><strong class="text-emerald-300">Animal Totem :</strong> <span id="resTotemAnimal" class="text-slate-300">-</span></p>
                     </div>
                 </div>
 
-                <!-- 6. Guides Multi-Traditions & Origine -->
+                <!-- 6. Panthéons & Origine Céleste -->
                 <div class="glass-card rounded-2xl p-6 relative">
-                    <div class="flex items-center space-x-3 mb-4 border-b border-rose-500/20 pb-3">
-                        <div class="w-10 h-10 rounded-lg bg-rose-500/10 border border-rose-500/30 flex items-center justify-center text-rose-400">
+                    <div class="flex items-center space-x-3 mb-4 border-b border-rose-500/30 pb-3">
+                        <div class="w-10 h-10 rounded-lg bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-300">
                             <i class="fa-solid fa-hands-praying"></i>
                         </div>
                         <div>
-                            <h3 class="font-cinzel font-bold text-rose-200">6. Panthéons & Âme</h3>
-                            <p class="text-xs text-slate-400">Saints, Divinités & Origine</p>
+                            <h3 class="font-cinzel font-bold text-rose-200">6. Panthéons & Origine</h3>
+                            <p class="text-xs text-slate-400">Saints, Divinités & Constellation</p>
                         </div>
                     </div>
-                    <div class="space-y-3 text-sm">
-                        <p><strong class="text-rose-300">Saint(e) Protecteur(trice) :</strong> <span id="resSaint" class="text-slate-300">-</span></p>
-                        <p><strong class="text-rose-300">Guide Hindou / Bouddhique :</strong> <span id="resEasternGuides" class="text-slate-300">-</span></p>
-                        <p><strong class="text-rose-300">Civilisation d'Âme :</strong> <span id="resCivilization" class="text-slate-300">-</span></p>
+                    <div class="space-y-2.5 text-sm">
+                        <p><strong class="text-rose-300">Saint(e) Protecteur(trice) :</strong> <span id="resSaint" class="text-slate-200 font-semibold">-</span></p>
+                        <p><strong class="text-rose-300">Guides d'Orient :</strong> <span id="resEasternGuides" class="text-slate-300">-</span></p>
+                        <p><strong class="text-rose-300">Constellation & Civilisation :</strong> <span id="resStellarCiv" class="text-slate-300">-</span></p>
                     </div>
                 </div>
 
             </div>
 
-            <!-- SYNTHÈSE ANALYTIQUE COMPLÈTE -->
+            <!-- SYNTHÈSE ANALYTIQUE EN ÉCRAN -->
             <div class="glass-panel rounded-3xl p-8 sm:p-12 border-amber-500/40 relative">
-                <div class="text-center mb-10 border-b border-amber-500/20 pb-6">
-                    <span class="inline-block px-4 py-1 rounded-full text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 uppercase tracking-widest mb-2">
-                        LES DIMENSIONS GAIA • RAPPORT D'EXPANSION
+                <div class="text-center mb-10 border-b border-amber-500/30 pb-6">
+                    <span class="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-amber-300 bg-amber-500/10 border border-amber-500/30 uppercase tracking-widest mb-2">
+                        LES DIMENSIONS GAIA • RAPPORT COMPLET DE 2 PAGES
                     </span>
                     <h2 class="font-cinzeldec text-2xl sm:text-4xl font-bold gold-gradient-text">
-                        Synthèse Spirituelle & Guide d'Épanouissement
+                        Synthèse Spirituelle & Mission d'Âme
                     </h2>
                     <p class="font-garamond text-lg text-slate-300 italic mt-2">
-                        Analyse approfondie des dons, de la guidance de l'Archange, des minéraux et des astuces concrètes de reconnexion.
+                        Analyse approfondie rédigée pour guider votre reconnexion intérieure et déployer vos potentiels.
                     </p>
                 </div>
 
-                <div id="fullAnalyticalSynthesis" class="font-garamond text-lg leading-relaxed text-slate-200 space-y-8">
+                <div id="screenFullSynthesis" class="font-garamond text-lg leading-relaxed text-slate-200 space-y-8">
+                    <!-- Généré dynamiquement -->
                 </div>
             </div>
 
-            <!-- BANNIÈRE TÉLÉCHARGEMENT DIRECT -->
-            <div class="no-print text-center p-8 rounded-2xl bg-gradient-to-r from-emerald-950 via-slate-900 to-purple-950 border border-amber-500/30 space-y-4">
+            <!-- BANNIÈRE DE TÉLÉCHARGEMENT BAS DE PAGE -->
+            <div class="no-print text-center p-8 rounded-3xl bg-gradient-to-r from-emerald-950 via-slate-950 to-purple-950 border border-amber-500/40 space-y-4">
                 <p class="font-cinzel text-amber-300 font-semibold text-lg">
                     Votre étude personnalisée est prête à être conservée ou remise à votre client.<br>
                     <span class="gold-gradient-text text-xl">Les Dimensions Gaia • Eddy Bousseta</span>
                 </p>
                 <div class="flex justify-center space-x-4">
-                    <button onclick="downloadPDFDirectly()" class="px-8 py-4 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-slate-950 font-bold hover:from-amber-200 hover:to-amber-400 transition-all shadow-xl shadow-amber-500/20 flex items-center space-x-3">
+                    <button onclick="downloadPDFDirectly()" class="px-8 py-4 rounded-xl bg-gradient-to-r from-amber-300 via-amber-400 to-amber-500 text-slate-950 font-bold hover:from-amber-200 hover:to-amber-400 transition-all shadow-xl shadow-amber-500/20 flex items-center space-x-3 text-base">
                         <i class="fa-solid fa-file-pdf text-xl"></i>
-                        <span>Télécharger Directement la Fiche au Format PDF</span>
+                        <span>Télécharger le Rapport PDF Directement</span>
                     </button>
                 </div>
             </div>
@@ -494,89 +494,104 @@
 
     </main>
 
-    <!-- ZONE EXPÉDIABLE / GÉNÉRABLE EN PDF (CONTENEUR COMPORTANT 2 PAGES STYLISEES) -->
-    <div id="pdfExportContainer" class="hidden">
+    <!-- ZONE DE RENDU PDF SÉPARÉE (2 PAGES A4 STRICTEMENT FORMATÉES SANS PAGE BLANCHE) -->
+    <div id="pdfExportRenderArea" class="hidden">
         <!-- PAGE 1 PDF -->
-        <div class="pdf-page">
-            <div style="text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 15px;">
-                <h1 style="font-family: 'Cinzel', serif; font-size: 20pt; font-weight: bold; color: #1a202c; margin: 0;">LES DIMENSIONS GAIA</h1>
-                <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 12pt; color: #744210; margin: 2px 0 0 0;">
-                    Profil Énergétique, Symbolique & Reconnexion Intérieure • Édité par Eddy Bousseta
+        <div class="pdf-page-sheet">
+            <!-- En-tête Page 1 -->
+            <div style="text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 12px; margin-bottom: 16px;">
+                <h1 style="font-family: 'Cinzel Decorative', serif; font-size: 18pt; font-weight: bold; color: #1a202c; margin: 0;">LES DIMENSIONS GAIA</h1>
+                <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 11pt; color: #744210; margin: 3px 0 0 0;">
+                    Profil Énergétique, Symbolique & Reconnexion • Eddy Bousseta
                 </p>
             </div>
 
-            <div style="background-color: #fcf8e3; border: 1px solid #f2d278; padding: 12px; border-radius: 8px; margin-bottom: 15px; text-align: center;">
-                <h2 id="pdfFullName1" style="font-family: 'Cinzel', serif; font-size: 16pt; margin: 0; color: #2d3748;">-</h2>
-                <p id="pdfMetaBirth1" style="font-family: 'Cormorant Garamond', serif; font-size: 11pt; margin: 3px 0 0 0; color: #4a5568;">-</p>
+            <!-- Encadré Client -->
+            <div style="background-color: #fdfbf2; border: 1px solid #e2c068; padding: 10px 15px; border-radius: 8px; margin-bottom: 16px; text-align: center;">
+                <h2 id="pdfFullNamePage1" style="font-family: 'Cinzel', serif; font-size: 15pt; margin: 0; color: #1a202c; font-weight: bold;">-</h2>
+                <p id="pdfMetaBirthPage1" style="font-family: 'Cormorant Garamond', serif; font-size: 11pt; margin: 3px 0 0 0; color: #4a5568; font-style: italic;">-</p>
             </div>
 
-            <h3 style="font-family: 'Cinzel', serif; font-size: 13pt; border-bottom: 1px solid #d4af37; color: #744210; margin-bottom: 8px;">
-                I. VIBRATIONS & GUIDANCE ANGÉLIQUE
+            <!-- Tableau Récapitulatif des Harmoniques -->
+            <h3 style="font-family: 'Cinzel', serif; font-size: 12pt; border-bottom: 1px solid #d4af37; color: #744210; margin-bottom: 8px; font-weight: bold;">
+                I. CARTE DES HARMONIQUES VIBRATOIRES
             </h3>
 
-            <table style="width: 100%; border-collapse: collapse; font-family: 'Cormorant Garamond', serif; font-size: 10.5pt; margin-bottom: 15px;">
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding: 5px; font-weight: bold; width: 35%;">Archange Protecteur :</td>
-                    <td id="pdfArchangelInfo" style="padding: 5px;">-</td>
+            <table style="width: 100%; border-collapse: collapse; font-family: 'Cormorant Garamond', serif; font-size: 10.5pt; margin-bottom: 16px;">
+                <tr style="border-bottom: 1px solid #edf2f7;">
+                    <td style="padding: 5px; font-weight: bold; width: 35%; color: #2d3748;">Signe Astrologique :</td>
+                    <td id="pdfZodiacInfo" style="padding: 5px; color: #1a202c;">-</td>
                 </tr>
-                <tr style="border-bottom: 1px solid #eee; background: #fafafa;">
-                    <td style="padding: 5px; font-weight: bold;">Pierre & Minéral Sacré :</td>
-                    <td id="pdfMineralInfo" style="padding: 5px;">-</td>
+                <tr style="border-bottom: 1px solid #edf2f7; background: #fafafa;">
+                    <td style="padding: 5px; font-weight: bold; color: #2d3748;">Archange Protecteur :</td>
+                    <td id="pdfArchangelInfo" style="padding: 5px; color: #1a202c;">-</td>
                 </tr>
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding: 5px; font-weight: bold;">Pratique Prioritaire :</td>
-                    <td id="pdfPracticeInfo" style="padding: 5px;">-</td>
+                <tr style="border-bottom: 1px solid #edf2f7;">
+                    <td style="padding: 5px; font-weight: bold; color: #2d3748;">Cristal & Minéral Sacré :</td>
+                    <td id="pdfMineralInfo" style="padding: 5px; color: #1a202c;">-</td>
                 </tr>
-                <tr style="border-bottom: 1px solid #eee; background: #fafafa;">
-                    <td style="padding: 5px; font-weight: bold;">Numérologie & Nom :</td>
-                    <td id="pdfNumerologyInfo" style="padding: 5px;">-</td>
+                <tr style="border-bottom: 1px solid #edf2f7; background: #fafafa;">
+                    <td style="padding: 5px; font-weight: bold; color: #2d3748;">Voie de Pratique :</td>
+                    <td id="pdfPracticeInfo" style="padding: 5px; color: #1a202c;">-</td>
                 </tr>
-                <tr style="border-bottom: 1px solid #eee;">
-                    <td style="padding: 5px; font-weight: bold;">Arbre & Animal Totem :</td>
-                    <td id="pdfNatureInfo" style="padding: 5px;">-</td>
+                <tr style="border-bottom: 1px solid #edf2f7;">
+                    <td style="padding: 5px; font-weight: bold; color: #2d3748;">Chemin de Vie & Nom :</td>
+                    <td id="pdfNumerologyInfo" style="padding: 5px; color: #1a202c;">-</td>
                 </tr>
-                <tr style="border-bottom: 1px solid #eee; background: #fafafa;">
-                    <td style="padding: 5px; font-weight: bold;">Guides & Civilisation d'Âme :</td>
-                    <td id="pdfGuidesInfo" style="padding: 5px;">-</td>
+                <tr style="border-bottom: 1px solid #edf2f7; background: #fafafa;">
+                    <td style="padding: 5px; font-weight: bold; color: #2d3748;">Arbre Druidique & Totem :</td>
+                    <td id="pdfNatureInfo" style="padding: 5px; color: #1a202c;">-</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #edf2f7;">
+                    <td style="padding: 5px; font-weight: bold; color: #2d3748;">Saints & Divinités Alliés :</td>
+                    <td id="pdfGuidesInfo" style="padding: 5px; color: #1a202c;">-</td>
                 </tr>
             </table>
 
-            <h3 style="font-family: 'Cinzel', serif; font-size: 13pt; border-bottom: 1px solid #d4af37; color: #744210; margin-top: 15px; margin-bottom: 8px;">
-                II. SYNTHÈSE ANALYTIQUE : DONS, MINÉRAUX & ARCHANGE (PARTIE 1)
+            <!-- Texte Synthèse Partie 1 -->
+            <h3 style="font-family: 'Cinzel', serif; font-size: 12pt; border-bottom: 1px solid #d4af37; color: #744210; margin-top: 14px; margin-bottom: 8px; font-weight: bold;">
+                II. DONS NATURELS, ARCHANGE & MINÉRAL MAÎTRE (PARTIE 1)
             </h3>
 
-            <div id="pdfSynthesisPart1" style="font-family: 'Cormorant Garamond', serif; font-size: 10.5pt; line-height: 1.45; text-align: justify; color: #2d3748;">
+            <div id="pdfTextPart1" style="font-family: 'Cormorant Garamond', serif; font-size: 10.5pt; line-height: 1.45; text-align: justify; color: #2d3748;">
+                <!-- Dynamique -->
             </div>
-            
-            <div style="position: absolute; bottom: 8mm; right: 15mm; font-size: 8.5pt; color: #888;">
+
+            <!-- Bas de page 1 -->
+            <div style="position: absolute; bottom: 8mm; right: 15mm; font-size: 8.5pt; color: #718096; font-family: sans-serif;">
                 Page 1 / 2 • Les Dimensions Gaia - Eddy Bousseta
             </div>
         </div>
 
         <!-- PAGE 2 PDF -->
-        <div class="pdf-page">
-            <div style="text-align: center; border-bottom: 1px solid #d4af37; padding-bottom: 8px; margin-bottom: 12px;">
-                <h2 style="font-family: 'Cinzel', serif; font-size: 13pt; color: #744210; margin: 0;">
-                    III. CLEFS PRATIQUES, ASTUCES D'ÉPANOUISSEMENT & MISSION D'ÂME (PARTIE 2)
+        <div class="pdf-page-sheet">
+            <!-- En-tête Page 2 -->
+            <div style="text-align: center; border-bottom: 1px solid #d4af37; padding-bottom: 8px; margin-bottom: 14px;">
+                <h2 style="font-family: 'Cinzel', serif; font-size: 12pt; color: #744210; margin: 0; font-weight: bold;">
+                    III. CLEFS PRATIQUES, MISSION D'ÂME & DÉCRET D'ACTIVATION (PARTIE 2)
                 </h2>
-                <p style="font-family: 'Cormorant Garamond', serif; font-size: 10pt; color: #666; margin: 2px 0 0 0;">
-                    Étude d'alignement pour <span id="pdfPage2Name" style="font-weight: bold;">-</span>
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 10pt; color: #4a5568; margin: 2px 0 0 0; font-style: italic;">
+                    Étude sacrée pour <span id="pdfNamePage2" style="font-weight: bold; font-style: normal;">-</span>
                 </p>
             </div>
 
-            <div id="pdfSynthesisPart2" style="font-family: 'Cormorant Garamond', serif; font-size: 10.5pt; line-height: 1.45; text-align: justify; color: #2d3748;">
+            <!-- Texte Synthèse Partie 2 -->
+            <div id="pdfTextPart2" style="font-family: 'Cormorant Garamond', serif; font-size: 10.5pt; line-height: 1.45; text-align: justify; color: #2d3748;">
+                <!-- Dynamique -->
             </div>
 
-            <div style="margin-top: 20px; border-top: 2px solid #d4af37; padding-top: 10px; text-align: center; font-family: 'Cormorant Garamond', serif;">
-                <p style="font-style: italic; font-size: 11pt; color: #744210; margin-bottom: 3px;">
-                    « Que les vibrations de l'Archange, des Cristaux et de la Terre Gaia ouvrent votre chemin de lumière. »
+            <!-- Signature & Clôture -->
+            <div style="margin-top: 25px; border-top: 2px solid #d4af37; padding-top: 12px; text-align: center; font-family: 'Cormorant Garamond', serif;">
+                <p style="font-style: italic; font-size: 11pt; color: #744210; margin-bottom: 4px; font-weight: 600;">
+                    « Que les vibrations de l'Archange, des Cristaux et de la Terre Gaia illuminent votre chemin. »
                 </p>
-                <p style="font-size: 9.5pt; color: #4a5568; font-weight: bold; margin: 0;">
-                    Édition intégrale certifiée - Eddy Bousseta • Les Dimensions Gaia
+                <p style="font-size: 9.5pt; color: #2d3748; font-weight: bold; margin: 0;">
+                    Édition certifiée - Eddy Bousseta • Les Dimensions Gaia
                 </p>
             </div>
 
-            <div style="position: absolute; bottom: 8mm; right: 15mm; font-size: 8.5pt; color: #888;">
+            <!-- Bas de page 2 -->
+            <div style="position: absolute; bottom: 8mm; right: 15mm; font-size: 8.5pt; color: #718096; font-family: sans-serif;">
                 Page 2 / 2 • Les Dimensions Gaia - Eddy Bousseta
             </div>
         </div>
@@ -586,158 +601,156 @@
     <footer class="no-print border-t border-slate-900 bg-black/80 py-6 mt-12 text-center text-xs text-slate-500 font-sans">
         <div class="max-w-7xl mx-auto px-4 space-y-2">
             <p>© <span id="currentYear"></span> <strong>Les Dimensions Gaia</strong> • Application créée par <strong>Eddy Bousseta</strong>.</p>
-            <p class="text-slate-600">Outil de consultation spirituelle, d'alignement énergétique et de connaissances de soi.</p>
+            <p class="text-slate-600">Outil de consultation spirituelle, d'alignement énergétique et de reconnexion sacrée.</p>
         </div>
     </footer>
 
-    <!-- SCRIPT ALGORITHMIQUE, ARCHANGES, MINÉRAUX & ASTUCES DE PRATIQUE -->
+    <!-- SCRIPT DE LOGIQUE & CALCULS ASTROLOGIQUES PARFAITS -->
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-        // -------------------------------------------------------------
-        // FORMATAGE DE DATE & HEURE MOBILE
-        // -------------------------------------------------------------
+        // Formatage en direct du champ Date
         function formatDateInput(input) {
             let v = input.value.replace(/\D/g, '');
-            if (v.length > 8) v = v.substring(0, 8);
-            
-            if (v.length >= 5) {
-                input.value = v.substring(0, 2) + '/' + v.substring(2, 4) + '/' + v.substring(4);
-            } else if (v.length >= 3) {
-                input.value = v.substring(0, 2) + '/' + v.substring(2);
+            if (v.length >= 2 && v.length < 4) {
+                input.value = v.substring(0,2) + '/' + v.substring(2);
+            } else if (v.length >= 4) {
+                input.value = v.substring(0,2) + '/' + v.substring(2,4) + '/' + v.substring(4,8);
             } else {
                 input.value = v;
             }
-            document.getElementById('dateError').classList.add('hidden');
         }
 
+        // Formatage en direct du champ Heure
         function formatTimeInput(input) {
             let v = input.value.replace(/\D/g, '');
-            if (v.length > 4) v = v.substring(0, 4);
-
-            if (v.length >= 3) {
-                input.value = v.substring(0, 2) + ':' + v.substring(2);
+            if (v.length >= 2) {
+                input.value = v.substring(0,2) + ':' + v.substring(2,4);
             } else {
                 input.value = v;
             }
-        }
-
-        function parseDateString(str) {
-            const parts = str.split('/');
-            if (parts.length !== 3) return null;
-            const day = parseInt(parts[0], 10);
-            const month = parseInt(parts[1], 10);
-            const year = parseInt(parts[2], 10);
-
-            if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
-            if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2100) return null;
-
-            return { day, month, year };
         }
 
         // -------------------------------------------------------------
-        // DATA ARCHANGES, MINÉRAUX & PRATIQUES
+        // CALCUL DU ZODIAQUE RIGOUREUX (CANCER DU 21 JUIN AU 22 JUILLET)
+        // -------------------------------------------------------------
+        function getZodiacSign(day, month) {
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) {
+                return { name: "Bélier", element: "Feu", constellation: "Aries", origin: "Système de Vega" };
+            } else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) {
+                return { name: "Taureau", element: "Terre", constellation: "Taurus", origin: "Amas des Pléiades" };
+            } else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) {
+                return { name: "Gémeaux", element: "Air", constellation: "Gemini", origin: "Système de Pollux" };
+            } else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) {
+                // CANCER STRICTEMENT DÉFINI DU 21 JUIN AU 22 JUILLET
+                return { name: "Cancer", element: "Eau", constellation: "Cancer", origin: "Système de Sirius B" };
+            } else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) {
+                return { name: "Lion", element: "Feu", constellation: "Leo", origin: "Étoile Régulus" };
+            } else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) {
+                return { name: "Vierge", element: "Terre", constellation: "Virgo", origin: "Étoile Spica" };
+            } else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) {
+                return { name: "Balance", element: "Air", constellation: "Libra", origin: "Constellation d'Andromède" };
+            } else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) {
+                return { name: "Scorpion", element: "Eau", constellation: "Scorpius", origin: "Étoile Antarès" };
+            } else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) {
+                return { name: "Sagittaire", element: "Feu", constellation: "Sagittarius", origin: "Centre Galactique" };
+            } else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) {
+                return { name: "Capricorne", element: "Terre", constellation: "Capricornus", origin: "Système d'Arcturus" };
+            } else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) {
+                return { name: "Verseau", element: "Air", constellation: "Aquarius", origin: "Ceinture d'Orion" };
+            } else { // (month === 2 && day >= 19) || (month === 3 && day <= 20)
+                return { name: "Poissons", element: "Eau", constellation: "Pisces", origin: "Étoile Fomalhaut" };
+            }
+        }
+
+        // -------------------------------------------------------------
+        // BASES DE DONNÉES SPIRITUELLES
         // -------------------------------------------------------------
 
         const ARCHANGELS = [
-            { name: "Archange Mikaël", ray: "Rayon Bleu de la Force, Protection & Vérité", mission: "Coupe les liens toxiques, apporte le courage et protège la foi." },
-            { name: "Archange Gabriel", ray: "Rayon Blanc de la Clarté, Pureté & Communication", mission: "Éclaire la voix juste, inspire l'écriture sacrée et le renouveau." },
-            { name: "Archange Raphaël", ray: "Rayon Vert Émeraude de la Guérison & Vision", mission: "Régénère le corps physique, libère le cœur et éclaire l'esprit." },
-            { name: "Archange Uriel", ray: "Rayon Or & Rubis de la Sagesse & Illumination", mission: "Apporte la paix dans le mental, transforme les angoisses en clarté." },
-            { name: "Archange Metatron", ray: "Rayon Violet & Cube de la Géométrie Sacrée", mission: "Élève le taux vibratoire, purifie les chakras et connecte au cosmos." },
-            { name: "Archange Sandalphon", ray: "Rayon Cuivré de la Musique, des Prières & Ancrage", mission: "Transporte les prières, résonne par le chant et la musique sacrée." },
-            { name: "Archange Jophiel", ray: "Rayon Jaune de la Beauté & Pensées Lumineuses", mission: "Illumine la création, éloigne la négativité et sublime la nature." },
-            { name: "Archange Zadkiel", ray: "Rayon Violet de la Transmutation & Pardon", mission: "Libère les mémoires karmiques et transforme l'ombre en lumière." }
+            { name: "Archange Mikaël", ray: "Rayon Bleu de Force & Protection", role: "Coupe les liens toxiques, apporte le courage et protège la foi divine." },
+            { name: "Archange Gabriel", ray: "Rayon Blanc de Clarté & Communication", role: "Éclaire la voix juste, inspire l'écriture sacrée et annonce le renouveau." },
+            { name: "Archange Raphaël", ray: "Rayon Vert Émeraude de Guérison", role: "Régénère le corps physique, soigne les blessures du cœur et offre la vision." },
+            { name: "Archange Uriel", ray: "Rayon Or & Rubis de Sagesse", role: "Apporte la paix dans le mental et transforme les doutes en clarté." },
+            { name: "Archange Metatron", ray: "Rayon Violet & Cube de Géométrie Sacrée", role: "Élève le taux vibratoire, purifie l'aura et connecte au cosmos." },
+            { name: "Archange Sandalphon", ray: "Rayon Cuivré de la Musique & Prières", role: "Ancre les énergies divines sur Terre et porte les chants sacrés." },
+            { name: "Archange Jophiel", ray: "Rayon Jaune de Beauté & Pensées Élevées", role: "Sublime la création artistique, apporte la lumière dans l'esprit." },
+            { name: "Archange Zadkiel", ray: "Rayon Violet de Transmutation & Pardon", role: "Libère les mémoires karmiques et transforme l'ombre en lumière." }
         ];
 
         const SACRED_MINERALS = [
-            { stone: "Lapis-Lazuli & Sodalite", prop: "Pierre de haute intuition et de communication céleste.", care: "Purification à l'eau claire, rechargement à la lumière de la Lune." },
-            { stone: "Malachite & Émeraude", prop: "Puissant régénérateur du chakra du cœur et d'ancrage vert.", care: "Purification sur amas de quartz ou fumigation de sauge, pas de sel." },
-            { stone: "Améthyste & Fluorite Violette", prop: "Pierre de transmutation spirituelle et de connexion intuitive.", care: "Purification par fumigation, rechargement au clair de Lune." },
-            { stone: "Oeil de Tigre & Citrine", prop: "Bouclier protecteur solaire et stimulant de la confiance.", care: "Purification eau salée, rechargement aux rayons du Soleil doux." },
-            { stone: "Jaspe Rouge & Cornaline", prop: "Ancrage profond à la Terre Mère Gaia et vitalité d'action.", care: "Purification eau courante, rechargement au Soleil ardent." },
-            { stone: "Pierre de Lune & Quartz Rose", prop: "Douceur sacrée, paix émotionnelle et réceptivité du cœur.", care: "Purification eau douce, rechargement exclusivement à la Pleine Lune." }
+            { stone: "Améthyste & Fluorite Violette", prop: "Pierre de haute connexion intuitive et de transmutation spirituelle.", care: "Purification par fumigation de sauge, rechargement à la lumière de la Lune." },
+            { stone: "Lapis-Lazuli & Sodalite", prop: "Élève la vision du 3ème œil et favorise l'expression de la vérité.", care: "Purification à l'eau claire, rechargement sous un ciel étoilé." },
+            { stone: "Quartz Rose & Pierre de Lune", prop: "Ouvre le chakra du cœur, apporte la douceur et guérit les émotions.", care: "Purification à l'eau douce, rechargement exclusivement à la Pleine Lune." },
+            { stone: "Émeraude & Malachite", prop: "Régénère le corps physique et ancre l'amour inconditionnel.", care: "Purification sur amas de quartz ou fumigation, pas de sel." },
+            { stone: "Citrine & Œil de Tigre", prop: "Bouclier protecteur solaire, stimule la confiance et l'abondance.", care: "Purification eau salée, rechargement aux rayons du Soleil doux." },
+            { stone: "Labradorite & Jaspe Rouge", prop: "Ancrage profond à la Terre Gaia et protection contre les énergies denses.", care: "Purification eau courante, rechargement au Soleil." }
         ];
 
-        const PRACTICES_AFINITY = [
+        const PRACTICES_CATALOG = [
             {
                 title: "Chant Sacré, Mantras & Vocalises Intuitives",
                 badgeName: "Chant Sacré & Mantras",
-                tip: "Votre voix est un instrument vibratoire direct. Pratiquez le chant du son AUM ou des mantras sacrés le matin. Les vocalises libres libèrent immédiatement les blocages de votre gorge et élèvent votre fréquence."
+                tip: "Votre voix est votre principal canal de guérison. Pratiquez le chant du son sacré AUM ou des mantras au réveil. Laissez vibrer vos cordes vocales sans jugement pour libérer immédiatement le chakra de la gorge."
             },
             {
-                title: "Lecture Sacrée à Voix Haute en Forêt / Ancrage Sylvestre",
+                title: "Lecture Sacrée à Voix Haute en Forêt / Reconnexion Sylvestre",
                 badgeName: "Lecture en Forêt & Ancrage",
-                tip: "Lisez des textes poétiques ou spirituels à haute voix au pied d'un grand arbre. La résonance de votre voix mariée à l'écosystème de la forêt crée une boucle d'harmonisation biologique et subtile d'une puissance rare."
+                tip: "Rendez-vous au pied d'un grand arbre (Chêne ou Frêne). Lisez des poèmes ou des textes sacrés à haute voix. La résonance de votre voix mariée à la forêt crée une boucle d'harmonisation biologique d'une puissance rare."
             },
             {
-                title: "Musicothérapie, Bols Chantants & Fréquences Sacrées (528 Hz)",
-                badgeName: "Musicothérapie & Fréquences",
-                tip: "Écoutez des sonorités en 432 Hz ou 528 Hz (fréquence de réparation). L'utilisation de bols de cristal ou de diapasons réaligne spontanément vos corps subtils et apaise votre système nerveux."
+                title: "Musicothérapie, Bols de Cristal & Fréquences Sacrées (528 Hz)",
+                badgeName: "Musicothérapie 528Hz",
+                tip: "Écoutez des sonorités en fréquences sacrées (432 Hz ou 528 Hz). L'utilisation d'un bol chantant ou de diapasons réaligne spontanément vos corps subtils et apaise le système nerveux."
             },
             {
                 title: "Méditation Silencieuse & Contemplation de la Nature",
                 badgeName: "Méditation & Contemplation",
-                tip: "Accordez-vous 15 minutes de silence absolu par jour, assis(e) face à un élément naturel (arbre, cours d'eau, bougie). Observez sans juger : le silence intérieur est votre portail d'inspiration directe."
+                tip: "Accordez-vous 15 minutes de silence absolu chaque jour, assis(e) face à un élément naturel (arbre, cours d'eau, bougie). Observez sans juger : le silence est votre portail d'inspiration directe."
             },
             {
-                title: "Écriture Intuitive & Journal d'Inspiration Divine",
+                title: "Écriture Intuitive & Canalisation du Caractère",
                 badgeName: "Écriture Intuitive",
-                tip: "Prenez un carnet dédié. Posez une question à vos guides ou à votre Archange, puis laissez courir votre stylo sans réfléchir pendant 10 minutes. Vos canalisations écrites seront d'une précision déconcertante."
+                tip: "Prenez un carnet dédié. Posez une question à vos guides ou à votre Archange, puis laissez courir votre stylo sans réfléchir pendant 10 minutes. Vos canalisations écrites révéleront vos réponses."
             },
             {
                 title: "Danse Introspective & Mouvement d'Ancrage Gaia",
-                badgeName: "Danse & Mouvement d'Ancrage",
-                tip: "Mettez une musique rythmée et fermez les yeux. Laissez votre corps bouger librement pieds nus sur le sol. Le mouvement libre débloque les mémoires corporelles logées dans votre bassin."
+                badgeName: "Danse & Mouvement Gaia",
+                tip: "Mettez une musique rythmée et fermez les yeux. Laissez votre corps bouger librement pieds nus sur le sol. Le mouvement libre débloque les mémoires corporelles logées dans le bassin."
             }
         ];
 
-        const ZODIAC_DATA = [
-            { name: "Bélier", startMonth: 3, startDay: 21, endMonth: 4, endDay: 19, element: "Feu", constellation: "Aries" },
-            { name: "Taureau", startMonth: 4, startDay: 20, endMonth: 5, endDay: 20, element: "Terre", constellation: "Taurus" },
-            { name: "Gémeaux", startMonth: 5, startDay: 21, endMonth: 6, endDay: 20, element: "Air", constellation: "Gemini" },
-            { name: "Cancer", startMonth: 6, startDay: 21, endMonth: 7, endDay: 22, element: "Eau", constellation: "Cancer" },
-            { name: "Lion", startMonth: 7, startDay: 23, endMonth: 8, endDay: 22, element: "Feu", constellation: "Leo" },
-            { name: "Vierge", startMonth: 8, startDay: 23, endMonth: 9, endDay: 22, element: "Terre", constellation: "Virgo" },
-            { name: "Balance", startMonth: 9, startDay: 23, endMonth: 10, endDay: 22, element: "Air", constellation: "Libra" },
-            { name: "Scorpion", startMonth: 10, startDay: 23, endMonth: 11, endDay: 21, element: "Eau", constellation: "Scorpius" },
-            { name: "Sagittaire", startMonth: 11, startDay: 22, endMonth: 12, endDay: 21, element: "Feu", constellation: "Sagittarius" },
-            { name: "Capricorne", startMonth: 12, startDay: 22, endMonth: 1, endDay: 19, element: "Terre", constellation: "Capricornus" },
-            { name: "Verseau", startMonth: 1, startDay: 20, endMonth: 2, endDay: 18, element: "Air", constellation: "Aquarius" },
-            { name: "Poissons", startMonth: 2, startDay: 19, endMonth: 3, endDay: 20, element: "Eau", constellation: "Pisces" }
-        ];
-
         const CELTIC_TREES = [
-            { name: "Bouleau", virtue: "Renouveau & Pureté", flower: "Muguet sauvage" },
-            { name: "Sorbier", virtue: "Protection contre les ombres", flower: "Bruyère" },
-            { name: "Frêne", virtue: "Connexion céleste & Adaptabilité", flower: "Anémone" },
-            { name: "Aulne", virtue: "Courage & Ancrage spirituel", flower: "Aubépine" },
+            { name: "Chêne", virtue: "Force, Souveraineté & Endurance", flower: "Iris sauvage" },
+            { name: "Bouleau", virtue: "Renouveau, Pureté & Inspiration", flower: "Muguet des bois" },
             { name: "Pommier", virtue: "Amour inconditionnel & Beauté", flower: "Fleur de Pommier" },
-            { name: "Cèdre", virtue: "Sagesse & Élévation", flower: "Orchidée des bois" },
-            { name: "Chêne", virtue: "Souveraineté & Endurance", flower: "Iris sacré" },
-            { name: "Noisetier", virtue: "Inspiration & Connaissance", flower: "Lotus d'eau" }
+            { name: "Cèdre", virtue: "Sagesse spirituelle & Élévation", flower: "Orchidée sauvage" },
+            { name: "Frêne", virtue: "Lien Terre-Ciel & Adaptabilité", flower: "Anémone" },
+            { name: "Olivier", virtue: "Paix, Harmonie & Lumière divine", flower: "Fleur d'Olivier" },
+            { name: "Noisetier", virtue: "Intuition & Connaissance cachée", flower: "Lotus d'eau" },
+            { name: "Sorbier", virtue: "Protection sacrée & Clairvoyance", flower: "Bruyère" }
         ];
 
         const TOTEM_ANIMALS = [
             { name: "Loup Émeraude", power: "Intuition & Esprit de meute" },
-            { name: "Aigle Solaire", power: "Vision sacrée & Hauteur" },
-            { name: "Ours Protecteur", power: "Introspection & Force" },
-            { name: "Dauphin d'Argent", power: "Joie & Fluidité vibratoire" },
-            { name: "Cerf Majestueux", power: "Noblesse du cœur" },
+            { name: "Aigle Solaire", power: "Vision sacrée & Hauteur d'esprit" },
+            { name: "Ours Protecteur", power: "Introspection & Force tranquille" },
+            { name: "Dauphin d'Argent", power: "Joie, Fluidité & Souffle sacré" },
+            { name: "Cerf Majestueux", power: "Noblesse du cœur & Ancrage" },
             { name: "Chouette de Sagesse", power: "Clairvoyance nocturne" }
         ];
 
         const HINDU_DEITIES = [
-            { name: "Ganesh", role: "Libérateur d'obstacles" },
-            { name: "Lakshmi", role: "Abondance spirituelle" },
-            { name: "Saraswati", role: "Sagesse & Arts sacrés" },
-            { name: "Shiva", role: "Transformation intérieure" }
+            { name: "Ganesh", role: "Libérateur d'obstacles & Sagesse" },
+            { name: "Lakshmi", role: "Abondance spirituelle & Grâce" },
+            { name: "Saraswati", role: "Sagesse, Musique & Arts sacrés" },
+            { name: "Shiva", role: "Transformation & Transmutation" }
         ];
 
         const BUDDHIST_GUIDES = [
-            { name: "Tara Verte", power: "Action & Compassion active" },
-            { name: "Avalokiteshvara", power: "Amour inconditionnel" },
-            { name: "Bouddha de Médecine", power: "Régénération holistique" }
+            { name: "Tara Verte", power: "Compassion active & Protection" },
+            { name: "Avalokiteshvara", power: "Amour inconditionnel ultime" },
+            { name: "Bouddha de Médecine", power: "Guérison holistique du corps" }
         ];
 
         const CIVILIZATIONS = [
@@ -748,16 +761,15 @@
         ];
 
         const CHAKRAS = [
-            { name: "Chakra Racine (Muladhara)", mantra: "JE SUIS ancré et nourri par Gaia." },
-            { name: "Chakra du Cœur (Anahata)", mantra: "J'AIME inconditionnellement." },
-            { name: "Chakra de la Gorge (Vishuddha)", mantra: "JE EXPRIME ma vérité avec grâce." },
-            { name: "Chakra du Troisième Œil (Ajna)", mantra: "JE VOIS la lumière divine en tout." }
+            { name: "Chakra Racine (Muladhara)", mantra: "JE SUIS ancré(e) et nourri(e) par la Terre Gaia." },
+            { name: "Chakra du Cœur (Anahata)", mantra: "J'AIME inconditionnellement et je reçois la grâce." },
+            { name: "Chakra de la Gorge (Vishuddha)", mantra: "JE M'EXPRIME avec clarté, vérité et douceur." },
+            { name: "Chakra du Troisième Œil (Ajna)", mantra: "JE VOIS la lumière divine derrière chaque illusion." }
         ];
 
         // -------------------------------------------------------------
-        // CALCULS & NUMÉROLOGIE
+        // NUMÉROLOGIE
         // -------------------------------------------------------------
-
         function reduceSum(num, allowMaster = true) {
             if (allowMaster && (num === 11 || num === 22 || num === 33)) return num;
             while (num > 9) {
@@ -788,52 +800,58 @@
 
         function getSaintName(gender, day, month) {
             const maleSaints = ["Saint Michel Archange", "Saint Gabriel", "Saint Raphaël", "Saint Antoine", "Saint François d'Assise", "Saint Benoît", "Saint Jean-Baptiste"];
-            const femaleSaints = ["Sainte Thérèse de Lisieux", "Sainte Rita", "Sainte Geneviève", "Sainte Bernadette", "Sainte Jeanne d'Arc", "Sainte Catherine"];
+            const femaleSaints = ["Sainte Thérèse de Lisieux", "Sainte Rita", "Sainte Geneviève", "Sainte Bernadette", "Sainte Jeanne d'Arc", "Sainte Catherine de Sienne"];
             const list = (gender === "femme") ? femaleSaints : maleSaints;
             return list[(day + month) % list.length];
         }
 
-        // Variable globale pour stocker les données générées
-        let currentGeneratedData = null;
+        // Variable globale du rapport
+        let currentReportData = null;
 
         // -------------------------------------------------------------
-        // GÉNÉRATION DU PROFIL
+        // FONCTION PRINCIPALE DE GÉNÉRATION
         // -------------------------------------------------------------
-
         function generateProfile(e) {
             e.preventDefault();
 
             const lastname = document.getElementById('lastname').value.trim();
             const firstname = document.getElementById('firstname').value.trim();
-            const birthdateRaw = document.getElementById('birthdate').value.trim();
-            const birthtime = document.getElementById('birthtime').value.trim();
+            const birthdateTxt = document.getElementById('birthdateText').value.trim();
+            const birthtimeTxt = document.getElementById('birthtimeText').value.trim();
             const birthplace = document.getElementById('birthplace').value.trim();
             const gender = document.getElementById('gender').value;
 
-            const dateObj = parseDateString(birthdateRaw);
-            if (!dateObj) {
-                document.getElementById('dateError').classList.remove('hidden');
+            // Validation simple de la date JJ/MM/AAAA
+            const dateParts = birthdateTxt.split('/');
+            if (dateParts.length !== 3) {
+                alert("Veuillez entrer une date de naissance valide au format JJ/MM/AAAA (ex: 28/06/1985).");
                 return;
             }
 
-            if (!lastname || !firstname || !birthplace) return;
+            const day = parseInt(dateParts[0], 10);
+            const month = parseInt(dateParts[1], 10);
+            const year = parseInt(dateParts[2], 10);
+
+            if (isNaN(day) || isNaN(month) || isNaN(year) || day < 1 || day > 31 || month < 1 || month > 12 || year < 1900 || year > 2030) {
+                alert("Veuillez vérifier les chiffres de votre date de naissance.");
+                return;
+            }
 
             document.getElementById('formSection').classList.add('hidden');
             document.getElementById('loaderSection').classList.remove('hidden');
 
             setTimeout(() => {
-                const { day, month, year } = dateObj;
                 const fullName = `${firstname} ${lastname}`;
 
-                const zodiac = ZODIAC_DATA[(day + month) % ZODIAC_DATA.length];
+                // Calculations
+                const zodiac = getZodiacSign(day, month);
                 const lifePath = calculateLifePath(day, month, year);
                 const exprNum = calculateExpressionNumber(fullName);
                 const personalYear = reduceSum(day + month + new Date().getFullYear(), false);
 
-                // Sélection des nouveaux modules
                 const archangel = ARCHANGELS[(day + month + year) % ARCHANGELS.length];
                 const mineral = SACRED_MINERALS[(day + lifePath) % SACRED_MINERALS.length];
-                const practice = PRACTICES_AFINITY[(exprNum + day) % PRACTICES_AFINITY.length];
+                const practice = PRACTICES_CATALOG[(exprNum + day) % PRACTICES_CATALOG.length];
 
                 const celticTree = CELTIC_TREES[(day + month) % CELTIC_TREES.length];
                 const totem = TOTEM_ANIMALS[(day + year) % TOTEM_ANIMALS.length];
@@ -843,18 +861,19 @@
                 const civ = CIVILIZATIONS[(day) % CIVILIZATIONS.length];
                 const chakra = CHAKRAS[(lifePath) % CHAKRAS.length];
 
-                const timeText = birthtime ? ` à ${birthtime}` : '';
-                const birthMetaText = `Né(e) le ${day.toString().padStart(2, '0')}/${month.toString().padStart(2, '0')}/${year}${timeText} à ${birthplace}`;
+                const timeFormatted = birthtimeTxt ? ` à ${birthtimeTxt}` : '';
+                const dayFormatted = day.toString().padStart(2, '0');
+                const monthFormatted = month.toString().padStart(2, '0');
+                const birthMetaText = `Né(e) le ${dayFormatted}/${monthFormatted}/${year}${timeFormatted} à ${birthplace}`;
 
-                // Stockage global
-                currentGeneratedData = {
+                currentReportData = {
                     fullName, firstname, lastname, birthMetaText,
                     zodiac, lifePath, exprNum, personalYear,
                     archangel, mineral, practice, celticTree,
                     totem, saint, hindu, buddhist, civ, chakra
                 };
 
-                // Mise à jour Écran
+                // Mise à jour de l'affichage Écran
                 document.getElementById('resFullName').textContent = fullName;
                 document.getElementById('resMetaBirth').textContent = birthMetaText;
                 document.getElementById('badgeZodiac').textContent = zodiac.name;
@@ -864,7 +883,7 @@
 
                 document.getElementById('resArchangel').textContent = archangel.name;
                 document.getElementById('resArchangelRay').textContent = archangel.ray;
-                document.getElementById('resArchangelMission').textContent = archangel.mission;
+                document.getElementById('resArchangelRole').textContent = archangel.role;
 
                 document.getElementById('resMineralStone').textContent = mineral.stone;
                 document.getElementById('resMineralProp').textContent = mineral.prop;
@@ -873,140 +892,154 @@
                 document.getElementById('resPracticeTitle').textContent = practice.title;
                 document.getElementById('resPracticeTip').textContent = practice.tip;
 
-                document.getElementById('resEtymology').textContent = `${firstname} est porté(e) par la grâce de l'alignement divin.`;
-                document.getElementById('resLifePath').textContent = `${lifePath} (Vibration d'incarnation)`;
+                document.getElementById('resLifePath').textContent = `${lifePath} (Alignement de l'incarnation)`;
                 document.getElementById('resExpressionNum').textContent = `${exprNum} (Fréquence du nom)`;
                 document.getElementById('resPersonalYear').textContent = `Année ${personalYear} / 9`;
+                document.getElementById('resEtymology').textContent = `${firstname} porte la vibration d'éveil de Gaia.`;
 
-                document.getElementById('resTree').textContent = celticTree.name;
+                document.getElementById('resTree').textContent = `${celticTree.name} (${celticTree.virtue})`;
                 document.getElementById('resFlower').textContent = celticTree.flower;
                 document.getElementById('resTotemAnimal').textContent = `${totem.name} (${totem.power})`;
 
                 document.getElementById('resSaint').textContent = saint;
                 document.getElementById('resEasternGuides').textContent = `${hindu.name} & ${buddhist.name}`;
-                document.getElementById('resCivilization').textContent = `${civ.name} (${civ.resort})`;
+                document.getElementById('resStellarCiv').textContent = `${zodiac.constellation} (${civ.name})`;
 
                 document.getElementById('summaryHeaderName').textContent = `Profil de ${fullName}`;
 
-                // Remplissage PDF Conteneur
-                document.getElementById('pdfFullName1').textContent = fullName.toUpperCase();
-                document.getElementById('pdfMetaBirth1').textContent = birthMetaText;
-                document.getElementById('pdfPage2Name').textContent = fullName;
+                // Remplissage de la Zone PDF
+                document.getElementById('pdfFullNamePage1').textContent = fullName.toUpperCase();
+                document.getElementById('pdfMetaBirthPage1').textContent = birthMetaText;
+                document.getElementById('pdfNamePage2').textContent = fullName;
 
-                document.getElementById('pdfArchangelInfo').textContent = `${archangel.name} (${archangel.ray})`;
+                document.getElementById('pdfZodiacInfo').textContent = `${zodiac.name} (Élément ${zodiac.element} • Constellation ${zodiac.constellation})`;
+                document.getElementById('pdfArchangelInfo').textContent = `${archangel.name} — ${archangel.ray}`;
                 document.getElementById('pdfMineralInfo').textContent = `${mineral.stone} — ${mineral.prop}`;
                 document.getElementById('pdfPracticeInfo').textContent = `${practice.title}`;
                 document.getElementById('pdfNumerologyInfo').textContent = `Chemin de vie ${lifePath} | Nombre d'Expression ${exprNum} | Année ${personalYear}`;
-                document.getElementById('pdfNatureInfo').textContent = `Arbre : ${celticTree.name} (${celticTree.flower}) | Totem : ${totem.name}`;
+                document.getElementById('pdfNatureInfo').textContent = `Arbre : ${celticTree.name} | Fleur : ${celticTree.flower} | Totem : ${totem.name}`;
                 document.getElementById('pdfGuidesInfo').textContent = `${saint} | ${hindu.name} | ${civ.name}`;
 
-                // Génération des 2 pages textuelles
-                generate2PageTextContent(currentGeneratedData);
+                // Remplissage des synthèses
+                build2PageAnalyticalText(currentReportData);
 
-                // Basculer l'affichage
+                // Masquer loader et afficher résultats
                 document.getElementById('loaderSection').classList.add('hidden');
                 document.getElementById('resultsSection').classList.remove('hidden');
                 document.getElementById('resetAppBtn').classList.remove('hidden');
 
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            }, 1000);
+            }, 800);
         }
 
         // -------------------------------------------------------------
-        // RÉDACTION COMPLÈTE DES 2 PAGES
+        // RÉDACTION COMPLÈTE DU TEXTE DE 2 PAGES
         // -------------------------------------------------------------
-
-        function generate2PageTextContent(d) {
-            const htmlPart1 = `
-                <div class="space-y-4">
-                    <p class="first-letter:text-4xl first-letter:font-cinzel first-letter:text-amber-500 first-letter:float-left first-letter:mr-3">
-                        L'analyse des fréquences cosmogoniques pour <strong>${d.fullName}</strong>, né(e) à ${d.birthMetaText.split('à')[1]}, révèle une incarnation marquée par une profonde quête de reconnexion et d'alignement. L'alliance entre votre signe <strong>${d.zodiac.name}</strong> et votre Chemin de Vie <strong>${d.lifePath}</strong> dessine le contour d'une personnalité réceptive, puissante et inspirée.
+        function build2PageAnalyticalText(d) {
+            const htmlP1 = `
+                <div style="margin-bottom: 12px;">
+                    <p style="margin-bottom: 8px;">
+                        L'analyse des fréquences cosmiques pour <strong>${d.fullName}</strong>, ${d.birthMetaText}, révèle un profil énergétique exceptionnel. Placé(e) sous l'égide du signe du <strong>${d.zodiac.name}</strong> (Élément ${d.zodiac.element}) et guidé(e) par le Chemin de Vie <strong>${d.lifePath}</strong>, votre incarnation est orientée vers la recherche d'harmonie et le déploiement de vos potentiels sacrés.
+                    </p>
+                    <p style="margin-bottom: 12px;">
+                        Votre prénom <strong>${d.firstname}</strong> agit comme une clé vibratoire qui stimule votre intuition et votre capacité naturelle d'écoute. L'énergie du zodiaque <em>${d.zodiac.name}</em> combinée à la constellation de <em>${d.zodiac.constellation}</em> vous confère une grande sensibilité aux variations énergétiques de votre environnement.
                     </p>
 
-                    <h4 class="font-cinzel font-bold text-amber-600 text-lg border-b border-amber-300 pb-1 mt-4">
-                        1. Guidance de votre Archange Protecteur
+                    <h4 style="font-family: 'Cinzel', serif; font-size: 11pt; color: #744210; font-weight: bold; margin-top: 10px; margin-bottom: 4px; border-bottom: 1px border #e2c068;">
+                        1. Guidance de votre Archange Protecteur : ${d.archangel.name}
                     </h4>
-                    <p>
-                        L'ange supérieur le plus proche de votre signature vibratoire est l'<strong>${d.archangel.name}</strong>, dispensateur du <em>${d.archangel.ray}</em>. Sa mission auprès de vous est claire : ${d.archangel.mission}. En faisant appel à son rayon dans vos moments de doute ou de transition, vous activerez un bouclier de protection immédiat autour de vos corps subtils.
+                    <p style="margin-bottom: 8px;">
+                        Votre guide angélique principal est l'<strong>${d.archangel.name}</strong>, dispensateur du <em>${d.archangel.ray}</em>. Il intervient directement dans votre vie pour : ${d.archangel.role}. Lorsque vous ressentez le besoin de protection ou de clarté, invoquez sa présence en visualisant une lumière étincelante entourant votre aura.
                     </p>
 
-                    <h4 class="font-cinzel font-bold text-amber-600 text-lg border-b border-amber-300 pb-1 mt-4">
-                        2. Minéral Sacré & Lithothérapie d'Ancrage
+                    <h4 style="font-family: 'Cinzel', serif; font-size: 11pt; color: #744210; font-weight: bold; margin-top: 10px; margin-bottom: 4px; border-bottom: 1px border #e2c068;">
+                        2. Cristal Maître & Allié Minéral : ${d.mineral.stone}
                     </h4>
-                    <p>
-                        Votre pierre maîtresse d'harmonisation est la combinaison <strong>${d.mineral.stone}</strong>. Ce minéral agit comme un condensateur d'énergie divine : <em>${d.mineral.prop}</em>.
-                        <br><strong>Astuce d'entretien :</strong> ${d.mineral.care}. Portez cette pierre sur vous ou déposez-la sur votre table de chevet pour stabiliser votre taux vibratoire pendant votre sommeil.
+                    <p style="margin-bottom: 8px;">
+                        Votre minéral sacré de prédilection est la combinaison <strong>${d.mineral.stone}</strong>. Ce cristal agit comme un catalyseur d'alignement : <em>${d.mineral.prop}</em>.
+                        <br><strong>Méthode d'entretien :</strong> ${d.mineral.care}. Garder cette pierre près de vous stabilise vos émotions et renforce votre taux vibratoire.
                     </p>
                 </div>
             `;
 
-            const htmlPart2 = `
-                <div class="space-y-4">
-                    <h4 class="font-cinzel font-bold text-amber-600 text-lg border-b border-amber-300 pb-1">
-                        3. Clé Prioritaire de Reconnexion Spirituelle & Astuces
+            const htmlP2 = `
+                <div>
+                    <h4 style="font-family: 'Cinzel', serif; font-size: 11pt; color: #744210; font-weight: bold; margin-top: 4px; margin-bottom: 4px;">
+                        3. Clé Prioritaire de Reconnexion : ${d.practice.title}
                     </h4>
-                    <p>
-                        Selon la synthèse de vos chiffres et de vos éléments, votre canal d'épanouissement le plus fluide et le plus direct est : 
-                        <strong class="text-amber-700 font-bold">${d.practice.title}</strong>.
+                    <p style="margin-bottom: 8px;">
+                        Pour déployer votre potentiel spirituel de la façon la plus fluide, votre voie de pratique idéale est : <strong style="color: #744210;">${d.practice.title}</strong>.
                     </p>
-                    <div class="p-3 bg-amber-50 rounded-lg border border-amber-200 text-slate-800 italic">
-                        <strong>Conseil de pratique personnalisée :</strong> ${d.practice.tip}
+                    <div style="background-color: #fcf8e3; border-left: 3px solid #d4af37; padding: 8px 12px; margin-bottom: 12px; font-style: italic;">
+                        <strong>Astuce concrète d'épanouissement :</strong> ${d.practice.tip}
                     </div>
 
-                    <h4 class="font-cinzel font-bold text-amber-600 text-lg border-b border-amber-300 pb-1 mt-4">
-                        4. Alignement de la Nature & Dons Karmiques
+                    <h4 style="font-family: 'Cinzel', serif; font-size: 11pt; color: #744210; font-weight: bold; margin-top: 10px; margin-bottom: 4px;">
+                        4. Alliance de la Nature & Poteaux Spirituels
                     </h4>
-                    <p>
-                        En synergie avec l'arbre druidique <strong>${d.celticTree.name}</strong> et la force de l'animal totem <strong>${d.totem.name}</strong>, vous possédez un don inné d'écoute et de transformation. Votre mémoire d'âme résonne puissamment avec la civilisation de <strong>${d.civ.name}</strong>.
+                    <p style="margin-bottom: 8px;">
+                        L'arbre druidique <strong>${d.celticTree.name}</strong> (${d.celticTree.virtue}) et votre animal totem <strong>${d.totem.name}</strong> (${d.totem.power}) vous transmettent la stabilité et l'ancrage. Vos mémoires d'âme résonnent particulièrement avec la sagesse de la civilisation d'ancrage <strong>${d.civ.name}</strong>.
                     </p>
 
-                    <h4 class="font-cinzel font-bold text-amber-600 text-lg border-b border-amber-300 pb-1 mt-4">
-                        5. Décret d'Activation par Les Dimensions Gaia
+                    <h4 style="font-family: 'Cinzel', serif; font-size: 11pt; color: #744210; font-weight: bold; margin-top: 10px; margin-bottom: 4px;">
+                        5. Décret d'Activation Spirituelle
                     </h4>
-                    <p class="italic text-center font-bold text-amber-800 p-2 bg-amber-50 rounded border border-amber-300">
-                        « Moi, ${d.firstname}, sous la protection de l'${d.archangel.name} et relié(e) à la Terre Mère Gaia, j'active dès aujourd'hui mes dons de lumière, la force de mon minéral sacré et la clarté de mon chant intérieur. »
+                    <p style="font-style: italic; font-weight: bold; text-align: center; background: #fdfbf2; border: 1px solid #e2c068; padding: 10px; border-radius: 6px; color: #2d3748; margin-top: 8px;">
+                        « Moi, ${d.firstname}, sous la protection bienveillante de l'${d.archangel.name} et ancré(e) dans l'énergie sacrée de la Terre Gaia, j'ouvre mon cœur à mes dons divins, à la force de mon cristal et à la beauté de ma mission sur Terre. »
                     </p>
                 </div>
             `;
 
-            document.getElementById('fullAnalyticalSynthesis').innerHTML = htmlPart1 + '<div class="my-6 border-t border-amber-500/30"></div>' + htmlPart2;
-            document.getElementById('pdfSynthesisPart1').innerHTML = htmlPart1;
-            document.getElementById('pdfSynthesisPart2').innerHTML = htmlPart2;
+            // Remplissage Écran
+            document.getElementById('screenFullSynthesis').innerHTML = htmlP1 + '<div class="my-6 border-t border-amber-500/30"></div>' + htmlP2;
+
+            // Remplissage Zone PDF
+            document.getElementById('pdfTextPart1').innerHTML = htmlP1;
+            document.getElementById('pdfTextPart2').innerHTML = htmlP2;
         }
 
         // -------------------------------------------------------------
-        // TÉLÉCHARGEMENT PDF AUTOMATIQUE DIRECT (html2pdf.js)
+        // GÉNÉRATION PDF SANS PAGE BLANCHE (HTML2PDF FIXÉ)
         // -------------------------------------------------------------
-
         function downloadPDFDirectly() {
-            if (!currentGeneratedData) return;
+            if (!currentReportData) return;
 
-            const element = document.getElementById('pdfExportContainer');
-            element.classList.remove('hidden');
+            const renderArea = document.getElementById('pdfExportRenderArea');
+            
+            // 1. Rendre temporairement le conteneur visible pour le moteur de capture
+            renderArea.classList.remove('hidden');
+
+            const btn = document.getElementById('downloadPdfBtn');
+            const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin text-base"></i> <span>Génération du PDF...</span>`;
 
             const opt = {
-                margin:       0,
-                filename:     `Fiche_Gaia_${currentGeneratedData.firstname}_${currentGeneratedData.lastname}.pdf`,
+                margin:       [0, 0, 0, 0],
+                filename:     `Fiche_Gaia_${currentReportData.firstname}_${currentReportData.lastname}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, logging: false },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    logging: false,
+                    scrollX: 0,
+                    scrollY: 0
+                },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            // Bouton état chargement
-            const btn = document.getElementById('downloadPdfBtn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> <span>Génération du PDF...</span>`;
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                element.classList.add('hidden');
-                btn.innerHTML = originalText;
-            }).catch(err => {
-                console.error('Erreur PDF:', err);
-                element.classList.add('hidden');
-                btn.innerHTML = originalText;
-                alert("Une erreur s'est produite lors du téléchargement. Veuillez retenter ou utiliser l'option Imprimer.");
-            });
+            // 2. Attendre 300ms pour garantir le calcul des styles et polices dans le DOM
+            setTimeout(() => {
+                html2pdf().set(opt).from(renderArea).save().then(() => {
+                    renderArea.classList.add('hidden');
+                    btn.innerHTML = originalBtnHtml;
+                }).catch(err => {
+                    console.error('Erreur de téléchargement PDF:', err);
+                    renderArea.classList.add('hidden');
+                    btn.innerHTML = originalBtnHtml;
+                    alert("Une erreur s'est produite lors de la création du PDF. L'option d'impression reste disponible.");
+                });
+            }, 300);
         }
 
         function resetForm() {
@@ -1014,8 +1047,7 @@
             document.getElementById('resultsSection').classList.add('hidden');
             document.getElementById('formSection').classList.remove('hidden');
             document.getElementById('resetAppBtn').classList.add('hidden');
-            document.getElementById('dateError').classList.add('hidden');
-            currentGeneratedData = null;
+            currentReportData = null;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
